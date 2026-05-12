@@ -1,17 +1,17 @@
-# nistula-technical-assessment
+# Nistula Technical Assessment
 
-Production-ready FastAPI backend for a hospitality messaging platform. The system accepts inbound messages from multiple channels, normalizes payloads, classifies intent, generates AI drafts through Anthropic Claude, and returns confidence-based routing actions.
+**Production-ready AI-powered hospitality messaging backend** built with FastAPI and Claude AI.
 
-## Project Overview
+The platform receives inbound guest messages from multiple channels, normalizes them into a unified schema, classifies guest intent, generates AI-assisted replies, and determines operational actions using confidence scoring.
 
-This service is designed for operational reliability in a guest communication workflow:
+## Key Capabilities
 
-- Multi-channel inbound webhook intake
-- Unified message schema with UUID traceability
-- Rule-based intent classification with complaint-first priority
-- Claude-generated draft replies using strict property context grounding
-- Confidence scoring and action routing (`auto_send`, `agent_review`, `escalate`)
-- Structured error handling for validation and upstream AI failures
+- **Multi-Channel Intake**: WhatsApp, Booking.com, Airbnb, Instagram, Direct
+- **Unified Schema**: All messages normalized with UUID traceability
+- **Intent Classification**: Rule-based detection (availability, pricing, check-in, special request, complaint, general inquiry)
+- **AI-Assisted Drafting**: Anthropic Claude with hospitality-safe grounding
+- **Confidence Routing**: Auto-send (>0.85), agent-review (0.60–0.85), escalate (<0.60 or complaints)
+- **Production-Grade**: Type hints, async/await, error handling, PostgreSQL schema, test payloads
 
 ## Features
 
@@ -103,6 +103,18 @@ API docs will be available at:
 
 ## API Documentation
 
+### API Preview
+
+Access interactive Swagger documentation at:
+```
+http://localhost:8000/docs
+```
+
+Interactive features:
+- Live endpoint testing with request/response examples
+- Automatic schema validation and type checking
+- Full model documentation with field constraints
+
 ### Health Check
 
 `GET /health`
@@ -133,14 +145,14 @@ Request body:
 }
 ```
 
-Example success response:
+Success response (200 OK):
 
 ```json
 {
   "message_id": "d2091e64-4fd5-4ef7-a7ec-c2e0d80e9b11",
   "query_type": "pre_sales_availability",
-  "drafted_reply": "Hi Rahul, great news...",
-  "confidence_score": 0.91,
+  "drafted_reply": "Hi Rahul! Great news—Villa B1 is available from April 20-24. The base rate is INR 18,000 per night for up to 4 guests, with INR 2,000 per night for each additional guest. For 2 adults, that would be INR 18,000 per night. Feel free to reach out with any other questions!",
+  "confidence_score": 0.93,
   "action": "auto_send"
 }
 ```
@@ -188,6 +200,23 @@ Action mapping:
 - FastAPI validation handler for structured 422 responses.
 - Claude timeout mapped to 504, provider errors mapped to 502.
 - Generic exception boundary returns consistent 500 response body.
+
+## Future Improvements
+
+- **Async Processing**: Redis queue for offloading long-running inference tasks
+- **Persistent Storage**: SQLAlchemy ORM layer with PostgreSQL migrations
+- **Conversation Memory**: Maintain multi-turn guest context within conversations table
+- **Semantic Classification**: Embed messages and use similarity search for intent refinement
+- **Multi-Property Support**: Dynamic property context loading from database
+- **Agent Dashboard**: React UI for reviewing queued messages, editing drafts, and tracking metrics
+- **Authentication & Rate Limiting**: JWT tokens, per-guest/property API quotas
+- **Observability**: OpenTelemetry spans, Prometheus metrics, Grafana dashboards
+- **Retry Strategy**: Exponential backoff for Claude API failures
+- **Webhook Security**: HMAC signature verification for inbound sources
+- **Conversation Summarization**: Auto-generate guest sentiment and issue summaries
+- **Multi-Language Support**: Translate inbound messages and draft replies
+- **Sentiment Analysis**: Detect guest satisfaction and escalate proactively
+- **A/B Testing**: Test multiple Claude prompts and measure response quality
 
 ## Future Improvements
 
