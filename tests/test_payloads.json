@@ -1,0 +1,67 @@
+[
+  {
+    "name": "availability_request",
+    "payload": {
+      "source": "whatsapp",
+      "guest_name": "Rahul Sharma",
+      "message": "Is the villa available from April 20 to 24?",
+      "timestamp": "2026-05-05T10:30:00Z",
+      "booking_ref": "NIS-2024-0891",
+      "property_id": "villa-b1"
+    },
+    "expected_query_type": "pre_sales_availability",
+    "expected_action": "auto_send"
+  },
+  {
+    "name": "pricing_request",
+    "payload": {
+      "source": "booking_com",
+      "guest_name": "Sneha Verma",
+      "message": "What is the total cost for 5 guests for 3 nights?",
+      "timestamp": "2026-05-05T11:10:00Z",
+      "booking_ref": "NIS-2024-0910",
+      "property_id": "villa-b1"
+    },
+    "expected_query_type": "pre_sales_pricing",
+    "expected_action": "auto_send"
+  },
+  {
+    "name": "complaint_message",
+    "payload": {
+      "source": "airbnb",
+      "guest_name": "Riya Menon",
+      "message": "This is unacceptable. The shower is not working and I want a refund.",
+      "timestamp": "2026-05-05T12:05:00Z",
+      "booking_ref": "NIS-2024-0934",
+      "property_id": "villa-b1"
+    },
+    "expected_query_type": "complaint",
+    "expected_action": "escalate"
+  },
+  {
+    "name": "checkin_wifi_question",
+    "payload": {
+      "source": "instagram",
+      "guest_name": "Karan Patel",
+      "message": "Please share WiFi password and check-in instructions.",
+      "timestamp": "2026-05-05T13:42:00Z",
+      "booking_ref": "NIS-2024-0955",
+      "property_id": "villa-b1"
+    },
+    "expected_query_type": "post_sales_checkin",
+    "expected_action": "auto_send"
+  },
+  {
+    "name": "special_request",
+    "payload": {
+      "source": "direct",
+      "guest_name": "Amit Kulkarni",
+      "message": "Can you arrange an airport transfer and early check-in?",
+      "timestamp": "2026-05-05T14:15:00Z",
+      "booking_ref": "NIS-2024-0978",
+      "property_id": "villa-b1"
+    },
+    "expected_query_type": "special_request",
+    "expected_action": "agent_review"
+  }
+]
